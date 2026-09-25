@@ -108,7 +108,7 @@ network `spoke_peers`.
 
 ## Switch patterns
 
-**To per-account — spokes first, then network**
+### To per-account — spokes first, then network
 
 1. Spokes: `outbound_pattern = "per-account"`, fill network_* / `dns_server_ip`,
    clear `shared_resolver_rule_id` and `shared_reverse_resolver_rule_id`, apply.
@@ -116,7 +116,7 @@ network `spoke_peers`.
 2. Network: `outbound_pattern = "per-account"`, clear `workload_account_ids`,
    set `spoke_peers`, apply.
 
-**Back to central — network first, then spokes**
+### Back to central — network first, then spokes
 
 1. Network: `central`, set `workload_account_ids`, clear `spoke_peers`, apply
    (RAM share must exist before spokes associate).
