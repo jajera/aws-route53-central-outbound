@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 340" width="960" height="340" role="img"
+     aria-labelledby="title desc"
+     font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif">
+  <title id="title">Chargeback and path to DNS: per-account vs central</title>
+  <desc id="desc">Left: each account pays its own ENI and query bill and needs its own network path to the DNS IP. Right: the network account pays hub ENIs and queries; spokes have no peering for resolution because the hub owns the path to DNS.</desc>
+  <defs>
+    <marker id="cp-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475467"/>
+    </marker>
+    <marker id="cp-arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ED7100"/>
+    </marker>
+  </defs>
+  <style>
+    .cp-panel { fill: #f6f7f9; stroke: #d0d5dd; stroke-width: 1.5; }
+    .cp-title { font-size: 16px; font-weight: 700; fill: #101828; }
+    .cp-meta  { font-size: 12px; font-weight: 500; fill: #667085; font-family: IBM Plex Mono, ui-monospace, monospace; }
+    .cp-label { font-size: 12px; font-weight: 600; fill: #344054; }
+    .cp-bill  { fill: #fff7ed; stroke: #ED7100; stroke-width: 1.5; }
+    .cp-bill-t { font-size: 12px; font-weight: 700; fill: #c2410c; font-family: IBM Plex Mono, ui-monospace, monospace; }
+    .cp-free  { fill: #ecfdf3; stroke: #087443; stroke-width: 1.5; }
+    .cp-free-t { font-size: 11px; font-weight: 700; fill: #087443; }
+    .cp-dns   { fill: #ffffff; stroke: #ED7100; stroke-width: 1.75; }
+    .cp-foot  { font-size: 12.5px; font-weight: 600; fill: #344054; }
+    .cp-path  { stroke: #ED7100; stroke-width: 1.75; fill: none; stroke-dasharray: 5 4; marker-end: url(#cp-arrow-orange); }
+    .cp-ram   { stroke: #8C4FFF; stroke-width: 1.5; fill: none; stroke-dasharray: 4 3; }
+  </style>
+
+  <rect class="cp-panel" x="16" y="16" width="448" height="308" rx="12"/>
+  <text class="cp-title" x="40" y="48">Per-account</text>
+  <text class="cp-meta" x="40" y="68">Each pays - each needs a path</text>
+
+  <rect class="cp-bill" x="40" y="88" width="100" height="70" rx="8"/>
+  <text class="cp-label" x="90" y="114" text-anchor="middle">VPC 1</text>
+  <text class="cp-bill-t" x="90" y="136" text-anchor="middle">$ ENIs</text>
+
+  <rect class="cp-bill" x="160" y="88" width="100" height="70" rx="8"/>
+  <text class="cp-label" x="210" y="114" text-anchor="middle">VPC 2</text>
+  <text class="cp-bill-t" x="210" y="136" text-anchor="middle">$ ENIs</text>
+
+  <rect class="cp-bill" x="280" y="88" width="100" height="70" rx="8"/>
+  <text class="cp-label" x="330" y="114" text-anchor="middle">VPC 3</text>
+  <text class="cp-bill-t" x="330" y="136" text-anchor="middle">$ ENIs</text>
+
+  <path class="cp-path" d="M 90 158 V 210"/>
+  <path class="cp-path" d="M 210 158 V 210"/>
+  <path class="cp-path" d="M 330 158 V 210"/>
+  <text class="cp-meta" x="210" y="198" text-anchor="middle">TGW / VPN / peering x3</text>
+
+  <rect class="cp-dns" x="140" y="220" width="200" height="48" rx="8"/>
+  <text class="cp-label" x="240" y="248" text-anchor="middle">Corporate DNS</text>
+
+  <text class="cp-foot" x="40" y="298">Chargeback is natural. Path cost is repeated.</text>
+
+  <rect class="cp-panel" x="496" y="16" width="448" height="308" rx="12"/>
+  <text class="cp-title" x="520" y="48">Central</text>
+  <text class="cp-meta" x="520" y="68">Network pays - hub owns the path</text>
+
+  <!-- Panel centre x=720; spokes 100w / 20 gap; hub 200w; DNS 160w -->
+  <rect class="cp-free" x="550" y="88" width="100" height="56" rx="8"/>
+  <text class="cp-label" x="600" y="112" text-anchor="middle">Spoke 1</text>
+  <text class="cp-free-t" x="600" y="130" text-anchor="middle">no ENI $</text>
+
+  <rect class="cp-free" x="670" y="88" width="100" height="56" rx="8"/>
+  <text class="cp-label" x="720" y="112" text-anchor="middle">Spoke 2</text>
+  <text class="cp-free-t" x="720" y="130" text-anchor="middle">no ENI $</text>
+
+  <rect class="cp-free" x="790" y="88" width="100" height="56" rx="8"/>
+  <text class="cp-label" x="840" y="112" text-anchor="middle">Spoke 3</text>
+  <text class="cp-free-t" x="840" y="130" text-anchor="middle">no ENI $</text>
+
+  <path class="cp-ram" d="M 600 144 V 168 L 680 184"/>
+  <path class="cp-ram" d="M 720 144 V 184"/>
+  <path class="cp-ram" d="M 840 144 V 168 L 760 184"/>
+  <rect fill="#f6f7f9" x="682" y="152" width="76" height="16" rx="2"/>
+  <text class="cp-meta" x="720" y="164" text-anchor="middle">RAM rule</text>
+
+  <rect class="cp-bill" x="620" y="184" width="200" height="48" rx="8"/>
+  <text class="cp-label" x="720" y="204" text-anchor="middle">Network hub</text>
+  <text class="cp-bill-t" x="720" y="222" text-anchor="middle">$ ENIs + queries</text>
+
+  <path class="cp-path" d="M 720 232 V 262"/>
+  <text class="cp-meta" x="748" y="250">path x1</text>
+
+  <rect class="cp-dns" x="640" y="262" width="160" height="36" rx="8"/>
+  <text class="cp-label" x="720" y="284" text-anchor="middle">Corporate DNS</text>
+
+  <text class="cp-foot" x="520" y="318">Bill lands on network. Spokes need no peering.</text>
+</svg>

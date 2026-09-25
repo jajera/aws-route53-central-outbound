@@ -1,0 +1,48 @@
+[project]
+site_name = "Central Route 53 outbound DNS"
+site_description = "Cost and design of central versus per-account Route 53 Resolver outbound endpoints, with a multi-account demo."
+site_url = "https://aws-route53-central-outbound.johna.kiwi/"
+nav = [
+  { "Overview" = "index.md" },
+  { "Patterns" = "patterns.md" },
+  { "Design" = "design.md" },
+  { "Cost" = "cost.md" },
+  { "Demo" = [
+    { "Overview" = "demo/index.md" },
+    { "Prerequisites" = "demo/prerequisites.md" },
+    { "Check profiles" = "demo/profiles.md" },
+    { "Build the hub" = "demo/hub.md" },
+    { "Attach spokes" = "demo/spokes.md" },
+    { "Verify with dig" = "demo/verify.md" },
+    { "Tear down" = "demo/teardown.md" },
+    { "Troubleshooting" = "demo/troubleshooting.md" },
+  ]},
+  { "References" = "references.md" },
+]
+extra_css = ["stylesheets/site.css"]
+
+[project.theme]
+name = "patina"
+custom_dir = "overrides"
+language = "en"
+favicon = "assets/favicon.png"
+logo = "assets/favicon.svg"
+features = [
+  "content.code.copy",
+  "navigation.footer",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+]
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+md_in_html = {}
+pymdownx.details = {}
+pymdownx.highlight = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+toc.permalink = true
+zensical.extensions.glightbox = { width = "95vw", height = "auto", zoomable = true }

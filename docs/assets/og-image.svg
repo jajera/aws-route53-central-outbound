@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630"
+     role="img" aria-label="Central Route 53 outbound DNS"
+     font-family="Outfit, IBM Plex Sans, Helvetica Neue, Arial, sans-serif">
+  <defs>
+    <linearGradient id="og-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08191f"/>
+      <stop offset="0.55" stop-color="#071014"/>
+      <stop offset="1" stop-color="#0a0710"/>
+    </linearGradient>
+    <radialGradient id="og-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#8C4FFF" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#8C4FFF" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="og-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#og-bg)"/>
+  <circle cx="965" cy="315" r="290" fill="url(#og-glow)"/>
+
+  <!-- Kicker -->
+  <text x="72" y="112" font-family="IBM Plex Mono, ui-monospace, monospace"
+        font-size="26" font-weight="600" letter-spacing="3" fill="#22d3ee">ROUTE 53 · RESOLVER OUTBOUND</text>
+
+  <!-- Title -->
+  <text x="70" y="205" font-size="76" font-weight="700" fill="#f4f6f8">Central Route 53</text>
+  <text x="70" y="292" font-size="76" font-weight="700" fill="#f4f6f8">outbound DNS</text>
+
+  <!-- Tagline -->
+  <text x="72" y="352" font-size="29" font-weight="400" fill="#c3cbd2">One network account owns a shared</text>
+  <text x="72" y="392" font-size="29" font-weight="400" fill="#c3cbd2">Resolver endpoint instead of one per</text>
+  <text x="72" y="432" font-size="29" font-weight="400" fill="#c3cbd2">account — the cost and design tradeoff.</text>
+
+  <!-- Tag pills -->
+  <g font-family="IBM Plex Mono, ui-monospace, monospace" font-size="22" font-weight="500">
+    <g>
+      <rect x="72" y="486" width="196" height="44" rx="22" fill="none" stroke="#8C4FFF" stroke-width="1.5"/>
+      <text x="170" y="515" fill="#c9b4ff" text-anchor="middle">per-account</text>
+    </g>
+    <g>
+      <rect x="284" y="486" width="146" height="44" rx="22" fill="none" stroke="#8C4FFF" stroke-width="1.5"/>
+      <text x="357" y="515" fill="#c9b4ff" text-anchor="middle">central</text>
+    </g>
+    <g>
+      <rect x="446" y="486" width="150" height="44" rx="22" fill="none" stroke="#8C4FFF" stroke-width="1.5"/>
+      <text x="521" y="515" fill="#c9b4ff" text-anchor="middle">AWS RAM</text>
+    </g>
+    <g>
+      <rect x="612" y="486" width="186" height="44" rx="22" fill="none" stroke="#8C4FFF" stroke-width="1.5"/>
+      <text x="705" y="515" fill="#c9b4ff" text-anchor="middle">ENI-hours</text>
+    </g>
+  </g>
+
+  <!-- URL -->
+  <text x="72" y="586" font-family="IBM Plex Mono, ui-monospace, monospace"
+        font-size="24" font-weight="500" fill="#7c8994">aws-route53-central-outbound.johna.kiwi</text>
+
+  <!-- Right graphic: spokes -> central hub -> corporate DNS (matches favicon) -->
+  <g transform="translate(820, 175)">
+    <circle cx="145" cy="140" r="185" fill="#0b1a20" stroke="#1d3540" stroke-width="1.5"/>
+    <g fill="none" stroke-linecap="round">
+      <path d="M60 55 C 130 55, 135 140, 178 140" stroke="#8C4FFF" stroke-width="4"/>
+      <path d="M48 140 H 178" stroke="#8C4FFF" stroke-width="4"/>
+      <path d="M60 225 C 130 225, 135 140, 178 140" stroke="#8C4FFF" stroke-width="4"/>
+      <path d="M212 140 H 268" stroke="#22d3ee" stroke-width="4.5" marker-end="url(#og-arrow)"/>
+    </g>
+    <!-- spoke VPC nodes -->
+    <g fill="#0b1a20" stroke="#8C4FFF" stroke-width="3.5">
+      <circle cx="48" cy="55" r="16"/>
+      <circle cx="34" cy="140" r="16"/>
+      <circle cx="48" cy="225" r="16"/>
+    </g>
+    <!-- central hub -->
+    <circle cx="178" cy="140" r="30" fill="#8C4FFF"/>
+    <circle cx="178" cy="140" r="12" fill="#0b1a20"/>
+    <!-- corporate DNS box -->
+    <rect x="272" y="116" width="46" height="48" rx="7" fill="#0b1a20" stroke="#22d3ee" stroke-width="3.5"/>
+    <!-- labels -->
+    <text x="34" y="30" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="17" fill="#8b93a0" text-anchor="middle">VPCs</text>
+    <text x="178" y="196" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="17" fill="#c9b4ff" text-anchor="middle">hub</text>
+    <text x="295" y="185" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="17" fill="#5fd8e6" text-anchor="middle">DNS</text>
+  </g>
+</svg>

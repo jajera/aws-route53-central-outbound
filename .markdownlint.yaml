@@ -1,0 +1,4 @@
+# Zensical (Patina) pages use HTML for layout cards and callouts.
+# md_in_html is enabled in zensical.toml.
+MD013: false
+MD033: false
