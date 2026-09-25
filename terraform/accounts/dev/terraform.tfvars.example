@@ -1,0 +1,20 @@
+aws_region       = "ap-southeast-2"
+aws_profile      = "dev"
+outbound_pattern = "central"
+project_name     = "r53-central-outbound"
+vpc_cidr         = "10.1.0.0/16"
+zone_name        = "corp.demo.internal"
+
+# Central — after network apply:
+# shared_resolver_rule_id         = "rslvr-rr-..."
+# shared_reverse_resolver_rule_id = "rslvr-rr-..."
+# ram_share_accept_required = false
+# ram_share_arn = ""  # only if ram_share_accept_required = true
+
+# Per-account — after network apply:
+# outbound_pattern   = "per-account"
+# reverse_zone_name  = "100.0.10.in-addr.arpa"
+# network_account_id = "..."
+# network_vpc_id     = "vpc-..."
+# network_vpc_cidr   = "10.0.0.0/16"
+# dns_server_ip      = "10.0.0.10"

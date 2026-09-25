@@ -1,0 +1,26 @@
+aws_region            = "ap-southeast-2"
+aws_profile           = "network"
+outbound_pattern      = "central"
+project_name          = "r53-central-outbound"
+vpc_cidr              = "10.0.0.0/16"
+dns_server_private_ip = "10.0.0.10"
+zone_name             = "corp.demo.internal"
+
+# Fill from: aws sts get-caller-identity --profile dev|sandbox --query Account --output text
+workload_account_ids = [
+  # "111122223333", # dev
+  # "444455556666", # sandbox
+]
+
+# Per-account only — after spokes request peering:
+# outbound_pattern = "per-account"
+# spoke_peers = {
+#   dev = {
+#     cidr                  = "10.1.0.0/16"
+#     peering_connection_id = "pcx-..."
+#   }
+#   sandbox = {
+#     cidr                  = "10.2.0.0/16"
+#     peering_connection_id = "pcx-..."
+#   }
+# }

@@ -1,0 +1,88 @@
+#!/bin/bash
+# Bootstrap authoritative BIND for the lab forward + reverse zones.
+# Pattern aligned with bind-to-route53-mirror-demo (AL2023 + S3 gateway, no NAT).
+set -ux
+
+# AL2023 repos are on S3; the private subnet reaches S3 via a gateway VPC endpoint.
+for attempt in $(seq 1 12); do
+  if dnf -y install bind bind-utils; then
+    break
+  fi
+  echo "dnf attempt $${attempt} failed, retrying in 15s..."
+  sleep 15
+done
+if ! rpm -q bind bind-utils >/dev/null 2>&1; then
+  echo "bind packages not installed after retries" >&2
+  exit 1
+fi
+
+set -e
+systemctl enable named
+
+# Confirm the fixed private IP we asked Terraform for (Resolver target must stay stable).
+TOKEN=$(curl -sf -X PUT "http://169.254.169.254/latest/api/token" \
+  -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+META_IP=$(curl -sf -H "X-aws-ec2-metadata-token: $${TOKEN}" \
+  http://169.254.169.254/latest/meta-data/local-ipv4)
+test -n "$${META_IP}"
+if [[ "$${META_IP}" != "${private_ip}" ]]; then
+  echo "metadata IP $${META_IP} != expected ${private_ip}" >&2
+  exit 1
+fi
+
+cat >/etc/named.conf <<EOF
+options {
+    directory "/var/named";
+    listen-on port 53 { any; };
+    listen-on-v6 { none; };
+    allow-query { ${allow_query}; };
+    recursion no;
+    dnssec-validation no;
+};
+
+zone "${zone_name}" IN {
+    type master;
+    file "/var/named/${zone_name}.zone";
+    allow-update { none; };
+};
+
+zone "${reverse_zone_name}" IN {
+    type master;
+    file "/var/named/${reverse_zone_name}.zone";
+    allow-update { none; };
+};
+EOF
+
+cat >/var/named/${zone_name}.zone <<EOF
+\$TTL 60
+@ IN SOA ns1.${zone_name}. admin.${zone_name}. (
+    ${soa_serial} ; serial (YYYYMMDDNN) — bump on manual edits, then rndc reload
+    3600       ; refresh
+    900        ; retry
+    604800     ; expire
+    60 )       ; minimum
+  IN NS  ns1.${zone_name}.
+ns1 IN A   ${private_ip}
+${zone_records}
+EOF
+
+cat >/var/named/${reverse_zone_name}.zone <<EOF
+\$TTL 60
+@ IN SOA ns1.${zone_name}. admin.${zone_name}. (
+    ${soa_serial} ; serial (YYYYMMDDNN)
+    3600
+    900
+    604800
+    60 )
+  IN NS  ns1.${zone_name}.
+${ptr_records}
+EOF
+
+chown root:named /var/named/${zone_name}.zone "/var/named/${reverse_zone_name}.zone"
+chmod 640 /var/named/${zone_name}.zone "/var/named/${reverse_zone_name}.zone"
+
+named-checkconf
+named-checkzone "${zone_name}" "/var/named/${zone_name}.zone"
+named-checkzone "${reverse_zone_name}" "/var/named/${reverse_zone_name}.zone"
+systemctl restart named
+systemctl is-active --quiet named

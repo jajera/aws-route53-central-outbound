@@ -1,0 +1,29 @@
+name: Terraform Validate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "terraform/**"
+      - ".github/workflows/terraform-validate.yml"
+  pull_request:
+    paths:
+      - "terraform/**"
+      - ".github/workflows/terraform-validate.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        path:
+          - terraform/accounts/network
+          - terraform/accounts/dev
+          - terraform/accounts/sandbox
+    uses: actionsforge/actions/.github/workflows/terraform-lint-validate.yml@main
+    with:
+      path: ${{ matrix.path }}

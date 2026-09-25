@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 250" width="620" height="250" role="img"
+     aria-labelledby="title desc"
+     font-family="IBM Plex Sans, Helvetica Neue, Arial, sans-serif">
+  <title id="title">Three CLI profiles map to three distinct AWS accounts</title>
+  <desc id="desc">The network, dev, and sandbox CLI profiles must each resolve to a different AWS account in ap-southeast-2. Example account IDs 123456789012, 234567890123, and 345678901234 are placeholders; confirm all three are distinct before applying.</desc>
+  <style>
+    .pf-panel { fill: #f6f7f9; stroke: #d0d5dd; stroke-width: 1.5; }
+    .pf-title { font-size: 15px; font-weight: 700; fill: #101828; }
+    .pf-head  { font-size: 11px; font-weight: 700; fill: #667085; letter-spacing: 0.03em; text-transform: uppercase; font-family: IBM Plex Mono, ui-monospace, monospace; }
+    .pf-pill  { fill: #f4f0ff; stroke: #8C4FFF; stroke-width: 1.5; }
+    .pf-prof  { font-size: 13px; font-weight: 700; fill: #6b28d9; font-family: IBM Plex Mono, ui-monospace, monospace; }
+    .pf-arrow { stroke: #475467; stroke-width: 1.75; fill: none; marker-end: url(#pf-a); }
+    .pf-acct  { fill: #ffffff; stroke: #d0d5dd; stroke-width: 1.5; }
+    .pf-id    { font-size: 13px; font-weight: 700; fill: #101828; font-family: IBM Plex Mono, ui-monospace, monospace; }
+    .pf-owns  { font-size: 10.5px; font-weight: 500; fill: #667085; }
+    .pf-note  { font-size: 11.5px; font-weight: 600; fill: #344054; }
+  </style>
+  <defs>
+    <marker id="pf-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475467"/>
+    </marker>
+  </defs>
+
+  <rect class="pf-panel" x="8" y="8" width="604" height="234" rx="14"/>
+  <text class="pf-title" x="28" y="36">One profile, one distinct account</text>
+  <text class="pf-head" x="40" y="66">CLI profile</text>
+  <text class="pf-head" x="250" y="66">AWS account (ap-southeast-2)</text>
+  <rect class="pf-pill" x="40" y="84" width="150" height="38" rx="19"/>
+  <text class="pf-prof" x="115" y="111" text-anchor="middle">network</text>
+  <path class="pf-arrow" d="M 196 106 H 244"/>
+  <rect class="pf-acct" x="250" y="84" width="330" height="38" rx="8"/>
+  <text class="pf-id" x="266" y="105">123456789012</text>
+  <text class="pf-owns" x="266" y="119">BIND · hub outbound · rule · RAM share</text>
+  <rect class="pf-pill" x="40" y="130" width="150" height="38" rx="19"/>
+  <text class="pf-prof" x="115" y="157" text-anchor="middle">dev</text>
+  <path class="pf-arrow" d="M 196 152 H 244"/>
+  <rect class="pf-acct" x="250" y="130" width="330" height="38" rx="8"/>
+  <text class="pf-id" x="266" y="151">234567890123</text>
+  <text class="pf-owns" x="266" y="165">dig client · shared-rule association</text>
+  <rect class="pf-pill" x="40" y="176" width="150" height="38" rx="19"/>
+  <text class="pf-prof" x="115" y="203" text-anchor="middle">sandbox</text>
+  <path class="pf-arrow" d="M 196 198 H 244"/>
+  <rect class="pf-acct" x="250" y="176" width="330" height="38" rx="8"/>
+  <text class="pf-id" x="266" y="197">345678901234</text>
+  <text class="pf-owns" x="266" y="211">dig client · shared-rule association</text>
+  <text class="pf-note" x="40" y="232">Three different account IDs — if any two match, fix the profile before applying.</text>
+</svg>
